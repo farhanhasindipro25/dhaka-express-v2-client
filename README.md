@@ -49,3 +49,30 @@ useEffect(() => {
 
 - To solve: Install CORS
 ``` npm install cors ```
+
+### Private Routes
+
+1. Only allow authenticated user to visit the route.
+2. Loading issue after login.
+3. Redirect user to the route they wanted to go before logging in.
+
+### Environment Variables for hiding Firebase configurations.
+
+1. Create a file called '.env.local' in the root directory.
+
+2. In the '.env.local' file, write:
+```
+REACT_APP_variableName=secretCode
+```
+
+3. In the 'firebase.config.js' file, write:
+
+```
+variableName: process.env.REACT_APP_variableName
+```
+
+4. Save and Start the project again using: 
+
+```
+npm run start
+```

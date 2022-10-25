@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBLT0uT32LdT3JzAqoKpC9UNyPujp29-sw",
-  authDomain: "dhaka-express.firebaseapp.com",
-  projectId: "dhaka-express",
-  storageBucket: "dhaka-express.appspot.com",
-  messagingSenderId: "375162036352",
-  appId: "1:375162036352:web:1021dd373116740f630665",
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
 };
 
 // Initialize Firebase

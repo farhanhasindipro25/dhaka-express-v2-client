@@ -1,14 +1,22 @@
 import React, { useContext } from "react";
+import { Button, Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 import LeftNav from "./LeftNav";
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
   return (
     <div>
       <Navbar
@@ -44,10 +52,37 @@ const Header = () => {
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="#deets">{user?.displayName}</Nav.Link>
-              <Nav.Link eventKey={2} href="#memes">
-                Dank memes
-              </Nav.Link>
+              <Link to="/profile">
+                {user?.uid ? (
+                  <span>
+                    {user.photoURL ? (
+                      <div className="d-flex align-items-center gap-2">
+                        <Image
+                          roundedCircle
+                          src={user.photoURL}
+                          style={{ height: "30px" }}
+                        ></Image>
+                        <span>{user.displayName}</span>
+                        <Button onClick={handleLogOut} variant="dark">
+                          Log Out
+                        </Button>
+                      </div>
+                    ) : (
+                      <div>
+                        <FaUser></FaUser>
+                        <Button onClick={handleLogOut} variant="dark">
+                          Log Out
+                        </Button>
+                      </div>
+                    )}
+                  </span>
+                ) : (
+                  <>
+                    <Link to="/login">Login</Link>
+                    <Link to="/signup">Sign Up</Link>
+                  </>
+                )}
+              </Link>
             </Nav>
             <div className="d-lg-none mt-3">
               <LeftNav></LeftNav>
