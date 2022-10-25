@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 import LeftNav from "./LeftNav";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="mb-5">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="light"
+        variant="light"
+        className="mb-5"
+      >
         <Container>
-          <Navbar.Brand href="#home" className="fw-bolder">
-            {" "}
-            <span className="text-primary">DHAKA</span> EXPRESS
+          <Navbar.Brand className="fw-bolder">
+            <Link to="/" className="text-decoration-none text-black">
+              <span className="text-primary ">DHAKA</span> EXPRESS
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -34,13 +44,13 @@ const Header = () => {
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="#deets">More deets</Nav.Link>
+              <Nav.Link href="#deets">{user?.displayName}</Nav.Link>
               <Nav.Link eventKey={2} href="#memes">
                 Dank memes
               </Nav.Link>
             </Nav>
             <div className="d-lg-none mt-3">
-                <LeftNav></LeftNav>
+              <LeftNav></LeftNav>
             </div>
           </Navbar.Collapse>
         </Container>
